@@ -39,3 +39,9 @@ You can tested in Ionic devapp
 ## Repos :
 
 https://github.com/ionic-team/ionic-native-google-maps
+
+https://github.com/davidbarrero38/Uicar-Backend
+
+https://github.com/davidbarrero38/Ionic-4-firebase
+
+https://github.com/davidbarrero38/cargarImagenesFirebaseionic4
