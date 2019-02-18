@@ -16,5 +16,7 @@
 
 
     <h1> </h1>
-
+    <ion-buttons *ngFor="let item of profiledata" (click)="presentModal2(item.ubication)">
+        <ion-icon size="large" src="/assets/icons/add.svg" padding></ion-icon>
+    </ion-buttons>
 </ion-content>

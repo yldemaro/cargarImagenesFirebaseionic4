@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: '', loadChildren: './main/main.module#MainPageModule' },
   { path: 'edituser/:id', loadChildren: './edit-user/edit-user.module#EditUserPageModule' },
   { path: 'create', loadChildren: './create/create.module#CreatePageModule' },
+  { path: 'modal-tablon', loadChildren: './modal-tablon/modal-tablon.module#ModalTablonPageModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

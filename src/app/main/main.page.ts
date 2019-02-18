@@ -5,6 +5,7 @@ import { ServicesService } from '../services.service';
 import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { ModalPagePage } from '../modal-page/modal-page.page';
+import { ModalTablonPage } from '../modal-tablon/modal-tablon.page';
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
@@ -13,6 +14,7 @@ import { ModalPagePage } from '../modal-page/modal-page.page';
 export class MainPage implements OnInit {
 
   uid: string;
+  profiledata = [];
 
   ngOnInit() {
   }
@@ -28,6 +30,10 @@ export class MainPage implements OnInit {
          // this.rout.navigateByUrl('/login');
         }
       );
+      this.profileload(this.uid);
+      setTimeout(() => {
+        this.profileload(this.uid);
+      }, 2000);
     }
 
   async presentModal() {
@@ -36,8 +42,24 @@ export class MainPage implements OnInit {
     });
     return await modal.present();
   }
+
+  async presentModal2() {
+    const modal = await this.modalController.create({
+      component: ModalTablonPage,
+      componentProps: { zona: 'Alcala' }
+    });
+    return await modal.present();
+  }
   gotoprofile() {
     this.router.navigateByUrl(`profile/` + this.uid);
+  }
+
+  async profileload(uid: string) {
+
+    await this.http.get(`http://uicar.openode.io/users/` + uid + '/info').subscribe((data: any) => {
+      this.profiledata = data;
+      console.log(data);
+    });
   }
 
 }

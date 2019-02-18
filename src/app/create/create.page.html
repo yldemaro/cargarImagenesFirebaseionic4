@@ -34,7 +34,7 @@
                     </ion-select>
                 </ion-item>
 
-                <ion-col size="6">
+                <ion-col>
                     <ion-item>
                         <ion-label style="color:grey;" position="floating">Nº Asientos</ion-label>
                         <ion-input [(ngModel)]="asientos"></ion-input>
@@ -43,13 +43,12 @@
 
 
             </ion-col>
-            <ion-col size="6" size-lg>
-                <ion-list>
-                    <ion-item *ngFor="let entry of form">
-                        <ion-label style="color:grey;">{{entry.val}}</ion-label>
-                        <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
-                    </ion-item>
-                </ion-list>
+            <ion-col size="6" size-md>
+
+                <ion-item *ngFor="let entry of form">
+                    <ion-label style="color:grey;">{{entry.val}}</ion-label>
+                    <ion-checkbox mode="ios" slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+                </ion-item>
 
             </ion-col>
         </ion-row>

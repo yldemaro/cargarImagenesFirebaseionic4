@@ -35,6 +35,10 @@ export class ProfilePagePage implements OnInit {
       );
     this.cargaruid();
     this.profileload(this.uidprofile);
+    setInterval(() => {
+      this.profileload(this.uidprofile);
+    }, 7000);
+
     if ( this.profiledata[0] === null) {
       console.log('Usuario vacio');
     } else {
