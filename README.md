@@ -1,4 +1,4 @@
-# Uicar 
+# Uicar.io 
 
 Un aplicacion para compartir coche en trayectos cortos y cotidianos, encuentra trayectos hacia tu direccion, conoce gente con la que compartir coche
 
@@ -23,7 +23,7 @@ You can tested in Ionic devapp
 
 ## TODO :
 
-- Recarga de perfil constante 
+- Recarga de perfil constante  ✔️ 
 
 - Whatsapp enlace que se abrá bien
 
@@ -34,3 +34,8 @@ You can tested in Ionic devapp
 - Editar usuario imagen
 
 - Mapa
+
+
+## Repos :
+
+https://github.com/ionic-team/ionic-native-google-maps
