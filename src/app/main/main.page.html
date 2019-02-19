@@ -15,8 +15,126 @@
 <ion-content padding>
 
 
-    <h1> </h1>
-    <ion-buttons *ngFor="let item of profiledata" (click)="presentModal2(item.ubication)">
-        <ion-icon size="large" src="/assets/icons/add.svg" padding></ion-icon>
-    </ion-buttons>
+
+
+    <h2> Trayectos cerca tuya </h2>
+    <br>
+    <ion-card>
+        <ion-card-content style="height: 110px;border-radius: 100px!important">
+            <ion-row class="carta">
+                <ion-col size="5">
+                    Madrid
+                </ion-col>
+                <ion-col size="2">
+                    <ion-icon style=" font-size: 25px;color: #3B455A" src="assets/icons/right-arrow.svg"></ion-icon>
+                </ion-col>
+                <ion-col size="5">
+                    Alcalá
+                </ion-col>
+
+            </ion-row>
+
+            <ion-row class="cartadesc">
+                <ion-col size="5">
+                    4:00 Salida
+                </ion-col>
+                <ion-col size="2">
+
+                </ion-col>
+                <ion-col style="font-size: 12px;text-align: center" size="3">
+                    3 <br>Asientos
+                </ion-col>
+                <ion-col size="2">
+                    <br>
+                    <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/car.svg'></ion-icon>
+                </ion-col>
+
+            </ion-row>
+
+            <ion-row class="cartaicon">
+                <ion-col size="10">
+
+                </ion-col>
+
+
+
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-content style="height: 110px;border-radius: 100px!important">
+            <ion-row class="carta">
+                <ion-col size="5">
+                    Madrid
+                </ion-col>
+                <ion-col size="2">
+                    <ion-icon style=" font-size: 25px;color: #3B455A" src="assets/icons/right-arrow.svg"></ion-icon>
+                </ion-col>
+                <ion-col size="5">
+                    Alcalá
+                </ion-col>
+
+            </ion-row>
+
+            <ion-row class="cartadesc">
+                <ion-col size="5">
+                    4:00 Salida
+                </ion-col>
+                <ion-col size="2">
+
+                </ion-col>
+                <ion-col style="font-size: 12px;text-align: center" size="3">
+                    3 <br>Asientos
+                </ion-col>
+                <ion-col size="2">
+                    <br>
+                    <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/car.svg'></ion-icon>
+                </ion-col>
+
+            </ion-row>
+
+            <ion-row class="cartaicon">
+                <ion-col size="10">
+
+                </ion-col>
+
+
+
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+    <br>
+    <h3>Cargar más</h3>
+    <br>
+
+
+
+    <ion-row>
+        <ion-col size="10">
+
+        </ion-col>
+        <ion-col size="2">
+            <ion-buttons *ngFor="let item of profiledata" (click)="presentModal2(item.ubication)">
+                <ion-icon slot="end" size="large" src="/assets/icons/add.svg"></ion-icon>
+            </ion-buttons>
+        </ion-col>
+    </ion-row>
+
+    <h2>Tablon</h2>
+
+    <ion-card>
+        <ion-card-content style="height: 100px;border-radius: 100px!important">
+            <h3 class="post">Salgo desde madrid y voy hasta valencia el viernes algun interesado?</h3>
+
+            <ion-row>
+                <ion-col size="9">
+                    <h4 style="text-align: left;color: #3B455A">David L. Barrero</h4>
+                </ion-col>
+                <ion-col size="3">
+                    <h4>12/2/2019 8:00pm</h4>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

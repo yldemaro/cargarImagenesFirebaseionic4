@@ -37,6 +37,7 @@ export class MainPage implements OnInit {
     }
 
   async presentModal() {
+    console.log('Modal 1');
     const modal = await this.modalController.create({
       component: ModalPagePage,
     });
@@ -44,11 +45,11 @@ export class MainPage implements OnInit {
   }
 
   async presentModal2() {
-    const modal = await this.modalController.create({
+    const modal2 = await this.modalController.create({
       component: ModalTablonPage,
       componentProps: { zona: 'Alcala' }
     });
-    return await modal.present();
+    return await modal2.present();
   }
   gotoprofile() {
     this.router.navigateByUrl(`profile/` + this.uid);
