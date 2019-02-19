@@ -15,6 +15,7 @@ export class MainPage implements OnInit {
 
   uid: string;
   profiledata = [];
+  tablondata = [];
 
   ngOnInit() {
   }
@@ -31,9 +32,13 @@ export class MainPage implements OnInit {
         }
       );
       this.profileload(this.uid);
+      this.tablonload('Alcala');
       setTimeout(() => {
         this.profileload(this.uid);
       }, 2000);
+      setInterval(() => {
+        this.tablonload('Alcala');
+      }, 7000);
     }
 
   async presentModal() {
@@ -59,6 +64,14 @@ export class MainPage implements OnInit {
 
     await this.http.get(`http://uicar.openode.io/users/` + uid + '/info').subscribe((data: any) => {
       this.profiledata = data;
+      console.log(data);
+    });
+  }
+
+  async tablonload(id: string) {
+
+    await this.http.get(`http://uicar.openode.io/zonas/` + id + '/tablon').subscribe((data: any) => {
+      this.tablondata = data;
       console.log(data);
     });
   }

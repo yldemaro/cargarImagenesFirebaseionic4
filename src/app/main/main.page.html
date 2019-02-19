@@ -123,16 +123,16 @@
 
     <h2>Tablon</h2>
 
-    <ion-card>
+    <ion-card *ngFor="let item of tablondata">
         <ion-card-content style="height: 100px;border-radius: 100px!important">
-            <h3 class="post">Salgo desde madrid y voy hasta valencia el viernes algun interesado?</h3>
+            <h3 class="post">{{ item.info }}</h3>
 
             <ion-row>
                 <ion-col size="9">
-                    <h4 style="text-align: left;color: #3B455A">David L. Barrero</h4>
+                    <h4 style="text-align: left;color: #3B455A">{{ item.nombre }}</h4>
                 </ion-col>
                 <ion-col size="3">
-                    <h4>12/2/2019 8:00pm</h4>
+                    <h4>{{ item.fecha | date:'medium' }}</h4>
                 </ion-col>
             </ion-row>
         </ion-card-content>
