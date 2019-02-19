@@ -16,6 +16,7 @@ export class MainPage implements OnInit {
   uid: string;
   profiledata = [];
   tablondata = [];
+  numero = 2 ;
 
   ngOnInit() {
   }
