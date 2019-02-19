@@ -23,7 +23,7 @@ You can tested in Ionic devapp
 
 ## TODO :
 
-- Recarga de perfil constante  ✔️ 
+- Recarga de perfil constante    ✔️ 
 
 - Whatsapp enlace que se abrá bien
 
@@ -31,7 +31,7 @@ You can tested in Ionic devapp
 
 - Mensaje de error formulario de editar usuario
 
-- Editar usuario imagen
+- Editar usuario imagen    ✔️ 
 
 - Mapa
 
@@ -39,3 +39,9 @@ You can tested in Ionic devapp
 ## Repos :
 
 https://github.com/ionic-team/ionic-native-google-maps
+
+https://github.com/davidbarrero38/Uicar-Backend
+
+https://github.com/davidbarrero38/Ionic-4-firebase
+
+https://github.com/davidbarrero38/cargarImagenesFirebaseionic4
