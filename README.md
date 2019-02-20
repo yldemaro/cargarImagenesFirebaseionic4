@@ -45,3 +45,5 @@ https://github.com/davidbarrero38/Uicar-Backend
 https://github.com/davidbarrero38/Ionic-4-firebase
 
 https://github.com/davidbarrero38/cargarImagenesFirebaseionic4
+
+https://github.com/apache/cordova-plugin-splashscreen
