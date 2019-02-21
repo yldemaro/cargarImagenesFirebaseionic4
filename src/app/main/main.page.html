@@ -12,84 +12,44 @@
     </ion-toolbar>
 </ion-header>
 
+<div #map class="map" id="map" style="position: relative"></div>
+
+
 <ion-content padding>
 
 
 
 
-    <h2> Trayectos cerca tuya </h2>
+    <h2> Trayectos cerca tuyo </h2>
     <br>
-    <ion-card>
-        <ion-card-content style="height: 110px;border-radius: 100px!important">
+    <ion-card *ngFor="let item of trayectos">
+        <ion-card-content (click)="open(item.id)" style="height: 110px;border-radius: 100px!important">
             <ion-row class="carta">
                 <ion-col size="5">
-                    Madrid
+                    {{ item.inicio }}
                 </ion-col>
                 <ion-col size="2">
                     <ion-icon style=" font-size: 25px;color: #3B455A" src="assets/icons/right-arrow.svg"></ion-icon>
                 </ion-col>
                 <ion-col size="5">
-                    Alcalá
+                    {{ item.destino }}
                 </ion-col>
 
             </ion-row>
 
             <ion-row class="cartadesc">
                 <ion-col size="5">
-                    4:00 Salida
+                    {{ item.hora }} Salida
                 </ion-col>
                 <ion-col size="2">
 
                 </ion-col>
                 <ion-col style="font-size: 12px;text-align: center" size="3">
-                    3 <br>Asientos
+                    {{ item.asientos }} <br>Asientos
                 </ion-col>
                 <ion-col size="2">
                     <br>
-                    <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/car.svg'></ion-icon>
-                </ion-col>
-
-            </ion-row>
-
-            <ion-row class="cartaicon">
-                <ion-col size="10">
-
-                </ion-col>
-
-
-
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-        <ion-card-content style="height: 110px;border-radius: 100px!important">
-            <ion-row class="carta">
-                <ion-col size="5">
-                    Madrid
-                </ion-col>
-                <ion-col size="2">
-                    <ion-icon style=" font-size: 25px;color: #3B455A" src="assets/icons/right-arrow.svg"></ion-icon>
-                </ion-col>
-                <ion-col size="5">
-                    Alcalá
-                </ion-col>
-
-            </ion-row>
-
-            <ion-row class="cartadesc">
-                <ion-col size="5">
-                    4:00 Salida
-                </ion-col>
-                <ion-col size="2">
-
-                </ion-col>
-                <ion-col style="font-size: 12px;text-align: center" size="3">
-                    3 <br>Asientos
-                </ion-col>
-                <ion-col size="2">
-                    <br>
-                    <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/car.svg'></ion-icon>
+                    <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/{{ item.vehiculo }}.svg'></ion-icon>
                 </ion-col>
 
             </ion-row>
@@ -124,7 +84,7 @@
     <h2>Tablon</h2>
 
     <ion-card *ngFor="let item of tablondata">
-        <ion-card-content style="height: 100px;border-radius: 100px!important">
+        <ion-card-content (click)="openprofile(item.uid)" style="min-height: 100px;border-radius: 100px!important">
             <h3 class="post">{{ item.info }}</h3>
 
             <ion-row>

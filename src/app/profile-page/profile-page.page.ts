@@ -17,6 +17,8 @@ export class ProfilePagePage implements OnInit {
   uidprofile: string;
   userprofile: boolean;
 
+  // Mapa variablees
+
   ngOnInit() {
   }
 
@@ -37,7 +39,7 @@ export class ProfilePagePage implements OnInit {
     this.profileload(this.uidprofile);
     setInterval(() => {
       this.profileload(this.uidprofile);
-    }, 7000);
+    }, 2000);
 
     if ( this.profiledata[0] === null) {
       console.log('Usuario vacio');

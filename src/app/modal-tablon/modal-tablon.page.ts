@@ -15,8 +15,8 @@ export class ModalTablonPage implements OnInit {
   uid: string;
   profiledata = [];
   info: string;
-  nombre: string;
   zona;
+  nombre;
   profiledetails: any;
 
 
@@ -40,21 +40,13 @@ export class ModalTablonPage implements OnInit {
   dismiss() {
     this.modalcontroler.dismiss();
   }
-  async profileload(uid: string) {
-
-    await this.http.get(`http://uicar.openode.io/users/` + uid + '/info').subscribe((data: any) => {
-      this.profiledata = data;
-      this.profiledetails = JSON.stringify(data.details);
-    });
-    console.log(this.profiledata['nombre']);
-  }
 
   async makepost() {
-    const {info , uid , zona } = this;
+    const {info , uid , zona  , nombre} = this;
     console.log( info , uid);
     const url = 'http://uicar.openode.io/tablon/' +  zona ;
     await this.http.post( url, {
-      nombre: 'Usuario',
+      nombre: nombre,
       uid: uid,
       zona: zona,
       info: info,

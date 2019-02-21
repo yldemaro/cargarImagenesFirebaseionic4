@@ -6,6 +6,12 @@ import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { ModalPagePage } from '../modal-page/modal-page.page';
 import { ModalTablonPage } from '../modal-tablon/modal-tablon.page';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+
+declare var google;
+
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
@@ -14,14 +20,34 @@ import { ModalTablonPage } from '../modal-tablon/modal-tablon.page';
 export class MainPage implements OnInit {
 
   uid: string;
-  profiledata = [];
+  profiledata = [{nombre: 'usuario', ubication: 'Sanse'}];
   tablondata = [];
+  data = [];
+  trayectos = [];
   numero = 2 ;
+  zona = 'zona';
+  nombre = 'Usuario';
+
+  // Variables mapa
+
+  key = 'AIzaSyATy7pX219NlBc9Sac6Biz0JgWR-cTB2f8';
+  flightPath: any;
+  map: any;
+  marker: any;
+  image = '../../assets/icons/marker.png';
+  directionsDisplay: any;
+
+  lat: number;
+  lng: number;
+
+  directionsService = new google.maps.DirectionsService();
 
   ngOnInit() {
   }
+
   constructor(private aut: AngularFireAuth, public modalController: ModalController,
-    private router: Router , public _servicie: ServicesService, private http: HttpClient) {
+    private router: Router , public _servicie: ServicesService, private http: HttpClient ,
+    private geolocation: Geolocation) {
       this.aut.authState
       .subscribe(
         user => {
@@ -32,14 +58,40 @@ export class MainPage implements OnInit {
          // this.rout.navigateByUrl('/login');
         }
       );
+        // Cargar ubicacion
+        this.geolocation.getCurrentPosition().then((resp) => {
+           this.lat = resp.coords.latitude;
+           this.lng = resp.coords.longitude;
+           console.log('thus cordenadas', this.lng , this.lat);
+         }).catch((error) => {
+           console.log('Error getting location', error);
+         });
+
       this.profileload(this.uid);
-      this.tablonload('Alcala');
+      this.tablonload(this.zona);
+      this.trayectosload(this.zona);
+
       setTimeout(() => {
         this.profileload(this.uid);
       }, 2000);
+
+      setTimeout(() => {
+        this.rutas();
+      }, 4000);
+      // Coger la ubicacion y el nombre
+
       setInterval(() => {
-        this.tablonload('Alcala');
-      }, 7000);
+        this.zona =  this.profiledata[0].ubication;
+        this.nombre = this.profiledata[0].nombre ;
+        console.log( this.profiledata[0].nombre);
+      }, 3000);
+
+
+
+      setInterval(() => {
+        this.tablonload(this.zona);
+        this.trayectosload(this.zona);
+      }, 4000);
     }
 
   async presentModal() {
@@ -53,7 +105,7 @@ export class MainPage implements OnInit {
   async presentModal2() {
     const modal2 = await this.modalController.create({
       component: ModalTablonPage,
-      componentProps: { zona: 'Alcala' }
+      componentProps: { zona: this.zona , nombre: this.nombre}
     });
     return await modal2.present();
   }
@@ -62,18 +114,87 @@ export class MainPage implements OnInit {
   }
 
   async profileload(uid: string) {
-
     await this.http.get(`http://uicar.openode.io/users/` + uid + '/info').subscribe((data: any) => {
       this.profiledata = data;
-      console.log(data);
     });
   }
-
   async tablonload(id: string) {
 
     await this.http.get(`http://uicar.openode.io/zonas/` + id + '/tablon').subscribe((data: any) => {
       this.tablondata = data;
       console.log(data);
+    });
+  }
+
+  async trayectosload(id: string) {
+
+    await this.http.get(`http://uicar.openode.io/zonas/` + id ).subscribe((data: any) => {
+      this.trayectos = data;
+      console.log(data);
+    });
+  }
+  takeprofile() {
+    console.log(this.profiledata);
+  }
+
+  open(id: number) {
+    this.router.navigateByUrl('info-trayecto' + '/' + id);
+  }
+
+  openprofile(id: number) {
+    this.router.navigateByUrl('profile' + '/' + id);
+  }
+
+
+  // Mapa
+
+  // Mapa
+
+  rutas() {
+    this.directionsDisplay = new google.maps.DirectionsRenderer();
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: { lat: this.lat, lng: this.lng },
+      mapTypeId: 'terrain'
+    });
+    this.directionsDisplay.setMap(this.map);
+
+
+    this.http.get(`http://uicar.openode.io/zonas/${this.zona}`).subscribe((data: any) => {
+      for (let i = 0; i < data.length; i++) {
+        this.directionsService.route({
+          origin: data[i].inicio,
+          destination: data[i].destino,
+          travelMode: 'DRIVING'
+        }, (response, status) => {
+          if (status === 'OK') {
+            // this.directionsDisplay.setDirections(response);
+            this.directionsDisplay = new google.maps.DirectionsRenderer({
+              suppressBicyclingLayer: false,
+              suppressMarkers: true
+            });
+            this.directionsDisplay.setMap(this.map);
+            this.directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+
+        this.http.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${data[i].destino}&sensor=false&key=${this.key}`)
+          .subscribe((data2: any) => {
+            const lat = data2.results[0].geometry.location.lat;
+            const lng = data2.results[0].geometry.location.lng;
+
+            console.log(lat, lng);
+
+            this.marker = new google.maps.Marker({
+              postion: { lat, lng },
+              map: this.map,
+              title: 'hola',
+              icon: this.image
+            });
+          });
+      }
     });
   }
 

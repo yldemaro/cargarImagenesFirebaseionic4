@@ -1,0 +1,31 @@
+<ion-header no-border>
+    <ion-toolbar no-border>
+        <ion-title style=" color: #3B455A;font-size: 24px;font-weight: bold;text-align: center!important">
+            Trayecto
+        </ion-title>
+        <ion-buttons slot="start">
+            <ion-icon (click)="return()" size="large" src="/assets/icons/left-arrow.svg" padding></ion-icon>
+        </ion-buttons>
+
+    </ion-toolbar>
+</ion-header>
+<div #map class="map" id="map2" style="position: relative"></div>
+<ion-content padding>
+    <h2>Informacion</h2>
+    <div *ngFor="let item of trayectodata">
+
+        <ion-icon style="font-size: 64px;margin-left: 40%;margin-right: 40%;width: 20%;" src="/assets/icons/{{ item.vehiculo }}.svg"></ion-icon>
+
+
+        <h1>Salida : {{ item.inicio }}</h1>
+        <h1>Destino : {{ item.destino }}</h1>
+        <h1>Hora : {{ item.hora }}</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <ion-button [routerLink]="['/profile' , item.uid]" routerLinkActive="router-link-active" expand="full" shape="round">Ir perfil usuario</ion-button>
+
+    </div>
+</ion-content>
