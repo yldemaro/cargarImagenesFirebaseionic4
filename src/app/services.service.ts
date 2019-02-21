@@ -76,25 +76,25 @@ export class ServicesService {
 
   makeFileIntoBlob(_imagePath) {
     return new Promise((resolve, reject) => {
-      // window.resolveLocalFileSystemURL(_imagePath, (fileEntry) => {
+      window.resolveLocalFileSystemURL(_imagePath, (fileEntry) => {
 
-      //   fileEntry.file((resFile) => {
+        fileEntry.file((resFile) => {
 
-      //     const reader = new FileReader();
-      //     reader.onloadend = (evt: any) => {
-      //       const imgBlob: any = new Blob([evt.target.result], { type: 'image/jpeg' });
-      //       imgBlob.name = 'sample.jpg';
-      //       resolve(imgBlob);
-      //     };
+          const reader = new FileReader();
+          reader.onloadend = (evt: any) => {
+            const imgBlob: any = new Blob([evt.target.result], { type: 'image/jpeg' });
+            imgBlob.name = 'sample.jpg';
+            resolve(imgBlob);
+          };
 
-      //     reader.onerror = (e) => {
-      //       console.log('Failed file read: ' + e.toString());
-      //       reject(e);
-      //     };
+          reader.onerror = (e) => {
+            console.log('Failed file read: ' + e.toString());
+            reject(e);
+          };
 
-      //     reader.readAsArrayBuffer(resFile);
-      //   });
-      // });
+          reader.readAsArrayBuffer(resFile);
+        });
+      });
     });
   }
 
