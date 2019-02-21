@@ -1,6 +1,6 @@
-# Uicar.io 
+# Uicar
 
-Un aplicacion para compartir coche en trayectos cortos y cotidianos, encuentra trayectos hacia tu direccion, conoce gente con la que compartir coche
+Un aplicacion para compartir coche en trayectos cortos y cotidianos, encuentra trayectos hacia tu direccion, conoce gente con la que compartir coche, desarrollada por David Barrero y Ydelmaro
 
 
 <img src="https://github.com/davidbarrero38/Uicar/blob/master/src/assets/icons/logopeque.png?raw=true">
@@ -45,3 +45,5 @@ https://github.com/davidbarrero38/Uicar-Backend
 https://github.com/davidbarrero38/Ionic-4-firebase
 
 https://github.com/davidbarrero38/cargarImagenesFirebaseionic4
+
+https://github.com/apache/cordova-plugin-splashscreen
