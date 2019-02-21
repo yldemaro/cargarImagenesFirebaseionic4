@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { ServicesService } from '../services.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginPage {
   username: string ;
   password: string ;
 
-  constructor(public afs: AngularFireAuth, public rout: Router , public service: ServicesService) {
+  constructor(public afs: AngularFireAuth, public rout: Router , public service: ServicesService ,
+     public alertController: AlertController) {
     this.service.initializeApp();
    }
 
@@ -37,11 +39,34 @@ export class LoginPage {
       this.rout.navigateByUrl('/');
     } catch (error) {
       console.log(error);
+      if (error.code === 'auth/wrong-password') {
+        this.errorContrasena();
+      } else if (error.code === 'auth/user-not-found') {
+        this.errorUsuario();
+      }
     }
   }
 
   goRegister() {
     this.rout.navigateByUrl('/register');
+  }
+
+  async errorContrasena() {
+    const alert = await this.alertController.create({
+      message: 'Lo siento su contraseña es incorrecta',
+      buttons: ['OK']
+    });
+
+     await alert.present();
+  }
+
+   async errorUsuario() {
+    const alert = await this.alertController.create({
+      message: 'Lo siento su email o usuario no se encuentra registrado',
+      buttons: ['OK']
+    });
+
+     await alert.present();
   }
 
 }
