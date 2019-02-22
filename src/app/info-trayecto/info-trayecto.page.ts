@@ -81,32 +81,17 @@ export class InfoTrayectoPage implements OnInit {
           travelMode: 'DRIVING'
         }, (response, status) => {
           if (status === 'OK') {
-            // this.directionsDisplay.setDirections(response);
+            this.directionsDisplay.setDirections(response);
             this.directionsDisplay = new google.maps.DirectionsRenderer({
               suppressBicyclingLayer: false,
               suppressMarkers: true
             });
             this.directionsDisplay.setMap(this.map);
-            this.directionsDisplay.setDirections(response);
+            // this.directionsDisplay.setDirections(response);
           } else {
             window.alert('Directions request failed due to ' + status);
           }
         });
-
-        this.http.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${data[i].destino}&sensor=false&key=${this.key}`)
-          .subscribe((data2: any) => {
-            const lat = data2.results[0].geometry.location.lat;
-            const lng = data2.results[0].geometry.location.lng;
-
-            console.log(lat, lng);
-
-            this.marker = new google.maps.Marker({
-              postion: { lat, lng },
-              map: this.map,
-              title: 'hola',
-              icon: this.image
-            });
-          });
       }
     });
   }

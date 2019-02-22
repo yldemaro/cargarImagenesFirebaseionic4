@@ -22,39 +22,19 @@ export class ProfilePagePage implements OnInit {
   ngOnInit() {
   }
 
-  constructor(  private http: HttpClient
-    , private aut: AngularFireAuth, private router: Router , public active: ActivatedRoute) {
-      this.aut.authState
-      .subscribe(
-        user => {
-          this.uid = user.uid;
-          console.log(user.uid);
-          this.checkuser(this.uid);
-        },
-        () => {
-         // this.rout.navigateByUrl('/login');
-        }
-      );
-    this.cargaruid();
-    this.profileload(this.uidprofile);
-    setInterval(() => {
-      this.profileload(this.uidprofile);
-    }, 2000);
+  constructor(private http: HttpClient
+    , private aut: AngularFireAuth, private router: Router, public active: ActivatedRoute) {
 
-    if ( this.profiledata[0] === null) {
-      console.log('Usuario vacio');
-    } else {
-      console.log(this.profiledata[0]);
-    }
-    }
 
-   async cargaruid() {
-    await this.active.params.subscribe((data2: any) => {
-      this.uidprofile = data2.id;
-    });
-   }
+    this.userprofile = true;
+    this.uid = localStorage.getItem('uid');
+    console.log('entro en profile');
 
-   async profileload(uid: string) {
+
+    this.profileload(this.uid);
+  }
+
+  async profileload(uid: string) {
 
     await this.http.get(`http://uicar.openode.io/users/` + uid + '/info').subscribe((data: any) => {
       this.profiledata = data;
@@ -64,6 +44,7 @@ export class ProfilePagePage implements OnInit {
       this.profiletrayectos = data;
     });
   }
+
   gotomain() {
     this.router.navigateByUrl('/');
   }
@@ -74,18 +55,10 @@ export class ProfilePagePage implements OnInit {
     this.router.navigateByUrl('/create');
   }
 
-  checkuser(uid: string) {
-    if ( uid === this.uidprofile ) {
-      console.log('Este es su perfil') ;
-      this.userprofile = true;
-    } else {
-      console.log('Este no su perfil') ;
-    }
-  }
-  gotowhatsapp( telf: string) {
+  gotowhatsapp(telf: string) {
     console.log(telf);
-    const newurl = 'https://api.whatsapp.com/send?phone=' + telf ;
-    window.open( newurl , '_system' , '_blank');
+    const newurl = 'https://api.whatsapp.com/send?phone=' + telf;
+    window.open(newurl, '_system', '_blank');
 
   }
 

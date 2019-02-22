@@ -21,8 +21,8 @@ export class EditUserPage implements OnInit {
 
   url: any;
 
-  constructor( public router: Router , public active: ActivatedRoute , private aut: AngularFireAuth
-    , private http: HttpClient , private cargaImagen: ServicesService) {
+  constructor(public router: Router, public active: ActivatedRoute, private aut: AngularFireAuth
+    , private http: HttpClient, private cargaImagen: ServicesService) {
     this.aut.authState
       .subscribe(
         user => {
@@ -30,12 +30,12 @@ export class EditUserPage implements OnInit {
           console.log(user.uid);
         },
         () => {
-         // this.rout.navigateByUrl('/login');
+          // this.rout.navigateByUrl('/login');
         }
       );
-      this.cargaruid();
-      this.zonasload();
-   }
+    this.cargaruid();
+    this.zonasload();
+  }
 
   ngOnInit() {
   }
@@ -49,9 +49,9 @@ export class EditUserPage implements OnInit {
     await this.active.params.subscribe((data2: any) => {
       this.uidprofile = data2.id;
     });
-   }
+  }
 
-   async zonasload() {
+  async zonasload() {
 
     await this.http.get(`http://uicar.openode.io/zonas/`).subscribe((data: any) => {
       this.zones = data;
@@ -60,33 +60,27 @@ export class EditUserPage implements OnInit {
   }
 
   async makepost() {
-    const { nombre, telefono , zona  , url , img} = this;
-    console.log(nombre, telefono , zona) ;
+    const { nombre, telefono, zona, url, img } = this;
+    console.log(nombre, telefono, zona);
+
+
+    if (this.cargaImagen.url === undefined) {
+      this.cargaImagen.url = 'assets/icono.png';
+    }
+
     await this.http.post('http://uicar.openode.io/edituser/', {
       nombre: nombre,
       uid: this.uid,
-      img: img,
+      img: this.cargaImagen.url,
       ubication: zona,
       whatsapp: telefono
-      }).subscribe((response) => {
+    }).subscribe((response) => {
       console.log(response);
-  });
-  this.router.navigateByUrl('/');
+    });
+    this.router.navigateByUrl('/');
   }
-
-  mostrarImagen() {
-    this.url = this.cargaImagen.url;
-  }
-
-  agregarImagenUrl(url) {
-    if (this.cargaImagen.url === undefined) {
-      this.cargaImagen.url = '../../assets/prueba.jpg';
-    }
-  }
-
 
   cargarImagen(data) {
     this.cargaImagen.cargarImagen(this.url);
   }
-
 }
