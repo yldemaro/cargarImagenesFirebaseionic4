@@ -22,6 +22,8 @@ declare var window;
 export class ServicesService {
   private CARPETA_IMAGENES = 'img';
   url: any;
+  uid: any;
+  public usuario: any = {};
 
   private galleryOptions: CameraOptions = {
     quality: 50,
@@ -54,6 +56,10 @@ export class ServicesService {
         user => {
           if (user) {
             // this.rout.navigateByUrl('tabs/tab1');
+            this.usuario.uid = user.uid;
+            this.usuario.nombre = user.displayName;
+            this.uid = user.uid;
+            localStorage.setItem('uid', this.uid);
           } else {
             this.rout.navigateByUrl('/login');
           }

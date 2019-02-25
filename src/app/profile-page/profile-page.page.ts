@@ -19,8 +19,7 @@ export class ProfilePagePage implements OnInit {
 
   // Mapa variablees
 
-  ngOnInit() {
-  }
+
 
   constructor(private http: HttpClient
     , private aut: AngularFireAuth, private router: Router, public active: ActivatedRoute) {
@@ -30,18 +29,26 @@ export class ProfilePagePage implements OnInit {
     this.uid = localStorage.getItem('uid');
     console.log('entro en profile');
 
-
-    this.profileload(this.uid);
   }
 
-  async profileload(uid: string) {
+  ngOnInit() {
+    setInterval(() => {
+      this.profileload();
+    }, 5000);
+  }
 
-    await this.http.get(`http://uicar.openode.io/users/` + uid + '/info').subscribe((data: any) => {
+  async profileload() {
+
+    await this.http.get(`http://uicar.openode.io/users/` + this.uid + '/info').subscribe((data: any) => {
+      // console.log(data);
       this.profiledata = data;
+      localStorage.setItem('ubication', this.profiledata[0].ubication);
+      localStorage.setItem('nombre', this.profiledata[0].nombre);
     });
 
-    await this.http.get(`http://uicar.openode.io/users/` + uid + '/trayectos').subscribe((data: any) => {
-      this.profiletrayectos = data;
+    await this.http.get(`http://uicar.openode.io/users/` + this.uid + '/trayectos').subscribe((data2: any) => {
+      // console.log(data2);
+      this.profiletrayectos = data2;
     });
   }
 

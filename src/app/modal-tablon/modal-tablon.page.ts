@@ -20,8 +20,8 @@ export class ModalTablonPage implements OnInit {
   profiledetails: any;
 
 
-  constructor(public modalcontroler: ModalController ,  private aut: AngularFireAuth ,
-    private http: HttpClient ,  public router: Router ,  public active: ActivatedRoute, ) {
+  constructor(public modalcontroler: ModalController, private aut: AngularFireAuth,
+    private http: HttpClient, public router: Router, public active: ActivatedRoute, ) {
     this.aut.authState
       .subscribe(
         user => {
@@ -29,33 +29,37 @@ export class ModalTablonPage implements OnInit {
           console.log(user.uid);
         },
         () => {
-         // this.rout.navigateByUrl('/login');
+          // this.rout.navigateByUrl('/login');
         }
       );
-   }
+
+  }
 
   ngOnInit() {
-    console.log(this.zona);
+    console.log(this.zona, this.nombre);
   }
-  dismiss() {
+  dismiss() {
     this.modalcontroler.dismiss();
   }
 
   async makepost() {
-    const {info , uid , zona  , nombre} = this;
-    console.log( info , uid);
-    const url = 'http://uicar.openode.io/tablon/' +  zona ;
-    await this.http.post( url, {
+
+    const { info, uid, zona, nombre } = this;
+    console.log(nombre);
+    console.log(info, uid);
+    const url = 'http://uicar.openode.io/tablon/' + zona;
+    await this.http.post(url, {
       nombre: nombre,
       uid: uid,
       zona: zona,
       info: info,
       fecha: new Date().getTime(),
 
-      }).subscribe((response) => {
+    }).subscribe((response) => {
       console.log(response);
-  });
-  this.dismiss();
+    });
+    this.dismiss();
+    this.router.navigateByUrl('/');
   }
 
 

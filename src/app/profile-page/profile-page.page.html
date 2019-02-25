@@ -21,6 +21,7 @@
 
 
     <div *ngFor="let item of profiledata">
+        <img *ngIf="!item.img" class="circle" [src]="assets/icons/icono.png">
         <img *ngIf="item.img" class="circle" [src]="item.img">
         <h2 color="secondary">{{ item.nombre }}</h2>
         <h3>Contacto</h3>

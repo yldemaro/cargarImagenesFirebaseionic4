@@ -65,7 +65,7 @@ export class EditUserPage implements OnInit {
 
 
     if (this.cargaImagen.url === undefined) {
-      this.cargaImagen.url = 'assets/icono.png';
+      this.cargaImagen.url = 'assets/icons/icono.png';
     }
 
     await this.http.post('http://uicar.openode.io/edituser/', {
@@ -75,12 +75,13 @@ export class EditUserPage implements OnInit {
       ubication: zona,
       whatsapp: telefono
     }).subscribe((response) => {
+
       console.log(response);
     });
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/profile');
   }
 
-  cargarImagen(data) {
+  cargarImagen() {
     this.cargaImagen.cargarImagen(this.url);
   }
 }

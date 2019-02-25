@@ -37,7 +37,7 @@ export class CreatePage implements OnInit {
       .subscribe(
         user => {
           this.uid = user.uid;
-          console.log(user.uid);
+          // console.log(user.uid);
         },
         () => {
          // this.rout.navigateByUrl('/login');
@@ -52,7 +52,7 @@ export class CreatePage implements OnInit {
 
     await this.http.get(`http://uicar.openode.io/zonas/`).subscribe((data: any) => {
       this.zones = data;
-      console.log(this.zones);
+      // console.log(this.zones);
     });
   }
   gotomain() {
@@ -80,6 +80,6 @@ export class CreatePage implements OnInit {
       }).subscribe((response) => {
       console.log(response);
   });
-  this.router.navigateByUrl('/');
+  this.router.navigateByUrl('/profile');
   }
 }
