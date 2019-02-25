@@ -1,17 +1,17 @@
 <ion-header no-border>
     <ion-toolbar no-border>
-        <ion-buttons (click)="gotomain()" slot="start">
+        <ion-buttons [routerLink]="['/']" slot="start">
             <ion-icon size="large" src="/assets/icons/left-arrow.svg" padding></ion-icon>
         </ion-buttons>
         <ion-buttons slot="end">
-            <ion-icon (click)="gotocreate()" size="large" src="/assets/icons/add.svg" padding></ion-icon>
+            <ion-icon [routerLink]="['/create']"size="large" src="/assets/icons/add.svg" padding></ion-icon>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content padding>
 
 
-    <div *ngIf="(profiledata)?.length === 0 ">
+    <div *ngIf="perfilT===0 ">
         <img class="circle" src="assets/icons/user.svg">
         <div class="noprofile">
             <h3 *ngIf="(profiledata)?.length === 0 ">Perfil vacío rellenalo ya!</h3>
@@ -20,8 +20,13 @@
     </div>
 
 
+    <div text-center *ngIf="userprofile===true">
+        <ion-spinner name="bubbles"></ion-spinner>
+        <p>Cargando Perfil</p>
+    </div>
+
+
     <div *ngFor="let item of profiledata">
-        <img *ngIf="!item.img" class="circle" [src]="assets/icons/icono.png">
         <img *ngIf="item.img" class="circle" [src]="item.img">
         <h2 color="secondary">{{ item.nombre }}</h2>
         <h3>Contacto</h3>
@@ -34,9 +39,9 @@
                 <ion-icon style=" font-size: 25px;" src="assets/icons/placeholder.svg"></ion-icon>
                 {{ item.ubication }}
             </ion-col>
-            <ion-col *ngIf="userprofile" size="2">
+            <ion-col size="2">
                 <ion-icon style=" font-size: 29px;margin-top:-15px;" src="/assets/icons/settings-work-tool (1).svg"
-                    padding (click)="gotoedit()"></ion-icon>
+                    padding [routerLink]="['/edituser']"></ion-icon>
             </ion-col>
 
         </ion-row>
@@ -82,4 +87,5 @@
             </ion-card-content>
         </ion-card>
     </div>
+
 </ion-content>

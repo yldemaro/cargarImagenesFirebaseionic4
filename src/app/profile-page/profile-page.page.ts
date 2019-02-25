@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -8,7 +8,7 @@ import { JsonPipe } from '@angular/common';
   templateUrl: './profile-page.page.html',
   styleUrls: ['./profile-page.page.scss'],
 })
-export class ProfilePagePage implements OnInit {
+export class ProfilePagePage implements AfterViewInit {
 
   profiledata = [];
   profiletrayectos = [];
@@ -16,6 +16,7 @@ export class ProfilePagePage implements OnInit {
   uid: string;
   uidprofile: string;
   userprofile: boolean;
+  perfilT: Number;
 
   // Mapa variablees
 
@@ -24,30 +25,34 @@ export class ProfilePagePage implements OnInit {
   constructor(private http: HttpClient
     , private aut: AngularFireAuth, private router: Router, public active: ActivatedRoute) {
 
-
+    console.log('entro a profile');
     this.userprofile = true;
     this.uid = localStorage.getItem('uid');
-    console.log('entro en profile');
 
   }
 
-  ngOnInit() {
+  ionViewCanEnter() {
+    if (this.uid === undefined) {
+      this.router.navigateByUrl('login');
+    }
+  }
+
+  ngAfterViewInit() {
     setInterval(() => {
       this.profileload();
-    }, 5000);
+    }, 3000)
   }
 
   async profileload() {
 
     await this.http.get(`http://uicar.openode.io/users/` + this.uid + '/info').subscribe((data: any) => {
-      // console.log(data);
+      this.perfilT = data.length;
+      this.userprofile = false;
       this.profiledata = data;
-      localStorage.setItem('ubication', this.profiledata[0].ubication);
-      localStorage.setItem('nombre', this.profiledata[0].nombre);
     });
 
     await this.http.get(`http://uicar.openode.io/users/` + this.uid + '/trayectos').subscribe((data2: any) => {
-      // console.log(data2);
+      this.userprofile = false;
       this.profiletrayectos = data2;
     });
   }
@@ -56,7 +61,7 @@ export class ProfilePagePage implements OnInit {
     this.router.navigateByUrl('/');
   }
   gotoedit() {
-    this.router.navigateByUrl('/edituser/' + this.uid);
+    this.router.navigateByUrl('/edituser');
   }
   gotocreate() {
     this.router.navigateByUrl('/create');

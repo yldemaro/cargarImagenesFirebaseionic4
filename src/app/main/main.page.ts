@@ -55,15 +55,11 @@ export class MainPage implements AfterViewInit {
 
     this.uid = localStorage.getItem('uid');
     console.log(this.uid);
-    
+
     this.profileload();
 
     this.zona = localStorage.getItem('ubication');
     this.nombre = localStorage.getItem('nombre');
-
-    if (this.uid === undefined) {
-      this.router.navigateByUrl('login');
-    }
 
     if (this.zona === null || this.zona === undefined) {
       this.zona = 'Madrid';
@@ -85,7 +81,13 @@ export class MainPage implements AfterViewInit {
 
   }
 
-  async ngAfterViewInit() {
+  ionViewCanEnter() {
+    if (this.uid === undefined) {
+      this.router.navigateByUrl('login');
+    }
+  }
+
+  ngAfterViewInit() {
     setInterval(() => {
       this.trayectosload();
       this.tablonload();
@@ -93,6 +95,9 @@ export class MainPage implements AfterViewInit {
     setTimeout(() => {
       this.rutas();
     }, 3000);
+  }
+  ionViewWillEnter() {
+    this.profileload();
   }
 
   async presentModal() {
@@ -104,6 +109,7 @@ export class MainPage implements AfterViewInit {
   }
 
   async presentModal2() {
+    this.nombre = localStorage.getItem('nombre');
     const modal2 = await this.modalController.create({
       component: ModalTablonPage,
       componentProps: { zona: this.zona, nombre: this.nombre }

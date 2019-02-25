@@ -23,7 +23,6 @@ export class LoginPage {
   async login() {
 
     const { username, password } = this;
-    console.log(username, password);
     try {
       const res = await this.afs.auth.signInWithEmailAndPassword(username, password);
       console.log(res);

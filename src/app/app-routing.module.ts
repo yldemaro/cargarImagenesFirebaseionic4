@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: 'modal-page', loadChildren: './modal-page/modal-page.module#ModalPagePageModule' },
   { path: 'profile', loadChildren: './profile-page/profile-page.module#ProfilePagePageModule' },
   { path: '', loadChildren: './main/main.module#MainPageModule' },
-  { path: 'edituser/:id', loadChildren: './edit-user/edit-user.module#EditUserPageModule' },
+  { path: 'edituser', loadChildren: './edit-user/edit-user.module#EditUserPageModule' },
   { path: 'create', loadChildren: './create/create.module#CreatePageModule' },
   { path: 'modal-tablon', loadChildren: './modal-tablon/modal-tablon.module#ModalTablonPageModule' },
   { path: 'info-trayecto/:id', loadChildren: './info-trayecto/info-trayecto.module#InfoTrayectoPageModule' },
